@@ -1,0 +1,75 @@
+buildscript {
+
+	ext {
+
+		silksmithVersion = '0.5.0-SNAPSHOT'
+
+	}
+	repositories {
+		mavenLocal()
+		jcenter()
+		maven { url = "http://dl.bintray.com/silksmith-io/maven" }
+		maven { url = "http://oss.jfrog.org/artifactory/libs-snapshot/"}
+
+	}
+
+	dependencies {
+
+		classpath group: 'io.silksmith', name: 'silksmith', version: silksmithVersion
+	}
+}
+
+subprojects {
+    apply plugin: "io.silksmith.plugin"
+    repositories {
+
+        jcenter()
+        maven { url="http://dl.bintray.com/silksmith-io/silk"}
+    }
+
+}
+
+project(":foo-lib"){
+
+    dependencies {
+        web "io.silksmith.libs:closure-base:1.0.2+smith.+"
+    }
+}
+project(":bar"){
+
+
+    dependencies {
+        web "io.silksmith.libs:closure-base:1.0.2+smith.+"
+        web "io.silksmith.libs:bootstrap-sass:3.3.3+smith.+"
+        web "io.silksmith.libs:jquery:1.11.2+smith.+"
+        web project(":foo-lib")
+
+        testWeb "io.silksmith.libs:chai:1.10.0+smith.0"
+    }
+
+    closureCompileJS{
+    entryPoint="sample.init"
+
+    // prints compile version and exits
+    //args << "--version"
+
+    // changes compilation level (default is ADVANCED_OPTIMIZATIONS)
+    args += [
+            "--compilation_level",
+            "ADVANCED_OPTIMIZATIONS"
+    ]
+
+    // sets options on the CompilerOptions directly
+    options {
+        //useNewTypeInference = true
+        languageIn = "ECMASCRIPT5"
+    }
+    }
+    server {
+        dir file("www")
+    }
+
+}
+task wrapper(type: Wrapper) { gradleVersion = '2.3' }
+
+

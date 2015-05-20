@@ -1,0 +1,15 @@
+@import "person";
+@import "bootstrap";
+
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.person-vip {
+  @include person-details(dashed, red)
+}
+
+.person-normal {
+  @include person-details(solid, grey)
+}
