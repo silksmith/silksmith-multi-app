@@ -2,21 +2,18 @@ buildscript {
 
 	ext {
 
-		silksmithVersion = '0.5.0-SNAPSHOT'
+		silksmithVersion = '0.5.0'
 
 	}
 	repositories {
-		mavenLocal()
-		jcenter()
-		maven { url = "http://dl.bintray.com/silksmith-io/maven" }
-		maven { url = "http://oss.jfrog.org/artifactory/libs-snapshot/"}
-
+	    maven {
+          url "https://plugins.gradle.org/m2/"
+        }
 	}
 
-	dependencies {
-
-		classpath group: 'io.silksmith', name: 'silksmith', version: silksmithVersion
-	}
+	  dependencies {
+        classpath "gradle.plugin.io.silksmith:silksmith:0.5.0"
+      }
 }
 
 subprojects {

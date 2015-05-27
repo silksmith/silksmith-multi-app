@@ -1,13 +1,11 @@
-@mixin person-details($border, $background) {
-
-  background-color: $background;
-  border-style: $border;
-  .first-name {
-    font-weight: bold;
-
-  }
-  .last-name {
-    font-style: italic;
-  }
-
+@mixin person-details($border,
+$background) {
+    background-color: $background;
+    border-style: $border;
+    .first-name {
+        font-weight: bold;
+    }
+    .last-name {
+        font-style: italic;
+    }
 }
